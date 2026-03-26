@@ -1,0 +1,39 @@
+const mongoose = require('mongoose');
+
+const contactSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: [true, 'Name is required'],
+      trim: true,
+    },
+    email: {
+      type: String,
+      required: [true, 'Email is required'],
+      trim: true,
+      lowercase: true,
+    },
+    phone: {
+      type: String,
+      trim: true,
+      default: '',
+    },
+    company: {
+      type: String,
+      trim: true,
+      default: '',
+    },
+    tag: {
+      type: String,
+      enum: ['Work', 'Client', 'Family', 'Friend', 'Other'],
+      default: 'Other',
+    },
+    starred: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  { timestamps: true }
+);
+
+module.exports = mongoose.model('Contact', contactSchema);
